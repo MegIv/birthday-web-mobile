@@ -8,30 +8,36 @@ function Cake() {
   // You may want to tweak these audio codes more to your liking.
   const [candlesBlownOut, setCandlesBlownOut] = useState(false);
   const [micPermissionGranted, setMicPermissionGranted] = useState(false);
+  const [micError, setMicError] = useState("");
+  const [showFallbackButton, setShowFallbackButton] = useState(false);
 
   useEffect(() => {
     let audioContext;
     let analyser;
     let dataArray;
     let blowStartTime = null;
+    let fallbackTimer;
 
     async function initBlowDetection() {
       try {
+        if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+          throw new Error("Microphone not supported");
+        }
         const stream = await navigator.mediaDevices.getUserMedia({
           audio: true,
         });
-        audioContext = new (window.AudioContext || window.AudioContext)();
+        audioContext = new (window.AudioContext || window.webkitAudioContext)();
         analyser = audioContext.createAnalyser();
         const source = audioContext.createMediaStreamSource(stream);
 
         analyser.fftSize = 512;
         const bufferLength = analyser.frequencyBinCount;
         dataArray = new Uint8Array(bufferLength);
-        source.connect(analyser);
-
         detectBlow();
       } catch (error) {
-        console.error("Microphone access denied:", error);
+        console.error("Microphone access failed:", error);
+        setMicError("Microphone unavailable or permission denied.");
+        setShowFallbackButton(true);
       }
     }
 
@@ -43,8 +49,8 @@ function Cake() {
         lowFrequencyValues.reduce((sum, value) => sum + value, 0) /
         lowFrequencyValues.length;
 
-      const blowThreshold = 100; // Moderate threshold
-      const requiredDuration = 1500; // 1. 5 sec blow required
+      const blowThreshold = 80; // Moderate threshold
+      const requiredDuration = 1200; // 1. 3-4 sec blow required
 
       if (averageLowFrequency > blowThreshold) {
         if (!blowStartTime) {
@@ -61,12 +67,17 @@ function Cake() {
       requestAnimationFrame(detectBlow);
     }
 
+    fallbackTimer = setTimeout(() => {
+      setShowFallbackButton(true);
+    }, 12000);
+
     setTimeout(() => {
       initBlowDetection();
       setMicPermissionGranted(true);
     }, 10000); //permission delay
 
     return () => {
+      clearTimeout(fallbackTimer);
       if (audioContext) {
         audioContext.close();
       }
@@ -112,6 +123,19 @@ function Cake() {
               </p>
             </Link>
           </motion.div>
+        )}
+        {showFallbackButton && !candlesBlownOut && (
+          <div className="mt-6 text-center">
+            <p className="text-white mb-3">
+              {micError || "If blowing does not work, tap the button below to light the cake."}
+            </p>
+            <button
+              onClick={() => setCandlesBlownOut(true)}
+              className="px-6 py-3 bg-customBlue text-white rounded-full hover:bg-blue-600"
+            >
+              I can't blow, continue
+            </button>
+          </div>
         )}
         <div className="relative z-10">
           <div className="absolute -top-48 left-1/2 transform -translate-x-1/2">
