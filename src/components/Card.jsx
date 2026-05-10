@@ -52,6 +52,7 @@ function Card() {
         "Terima kasih karena akhirnya kita dipertemukan bukan sekedar dua orang yang saling menunggu, tapi juga dua hati yang akhirnya saling memiliki.",
         "Once more... i always love you.",
         " :)",
+        "Happy 20th my beautiful woman.",
         "Signed: Ivan Ramadhan"
       ]
     }
