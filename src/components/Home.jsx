@@ -6,7 +6,8 @@ function Home() {
     const [visibleCount, setVisibleCount] = useState(1)
     const navigate = useNavigate()
     const sentences = [
-    "Hi John Doe",
+    "Hi Andi Annisa Melani Asri",
+    "a.k.a my Beloved one...",
     "I have something to show you:)"
   ]
 

@@ -6,7 +6,7 @@ function Present() {
     <SectionWrapper>
       <div className='mb-64'>
         <h1 className="absolute -top-[7rem] left-0 right-0 text-center flex items-center justify-center text-xl font-extrabold text-customBlue drop-shadow-lg">
-          Click the box to see your gifts!
+          Click the box to see your gifts! All by me :)
         </h1>
       </div>
       <div className="birthday-gift">
