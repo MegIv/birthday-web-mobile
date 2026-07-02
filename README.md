@@ -1,28 +1,25 @@
-# Birthday Website (mobile version)
+🎂 Birthday Website (Mobile)
+A beautiful, responsive birthday card website built with modern web technologies. Perfect for creating personalized birthday celebrations with smooth animations and mobile-first design.
 
-### Installation
-
-1. Clone the repository
-   ```bash
-   git clone https://github.com/rheinatamara/birthday_website_mobile.git
-   
-   cd birthday_website_mobile
-   ```
-2. Install dependencies
-   ```bash
-   npm install
-   ```
-3. Start the development server:
-    ```bash
-    npm run dev
-    ```
-4. Open your browser and navigate to http://localhost:5173/ (default Vite dev   server URL).
-
-
-### Build For Production
-
- To build the project for production:
-```bash
-npm run build
-```
-The production-ready files will be generated in the _dist_ directory.
+✨ Features
+📱 Mobile-First Design – Optimized for all screen sizes and devices
+✨ Smooth Animations – Built with Framer Motion for delightful user interactions
+🎨 Modern UI – Styled with Tailwind CSS for a polished look
+⚡ Fast & Responsive – Powered by Vite for instant dev experience
+🧭 Easy Navigation – React Router for seamless page transitions
+🎯 Accessible Icons – Lucide React icons throughout the app
+🛠️ Tech Stack
+Frontend Framework: React 18
+Build Tool: Vite
+Styling: Tailwind CSS
+Animations: Framer Motion
+Routing: React Router DOM
+Icons: Lucide React
+Linting: ESLint
+📋 Prerequisites
+Node.js (v14 or higher)
+npm or yarn
+🚀 Quick Start
+1. Clone the Repository
+git clone https://github.com/MegIv/birthday-web-mobile.git
+cd birthday-web-mobile
